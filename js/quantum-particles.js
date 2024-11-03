@@ -1,7 +1,6 @@
 class QuantumParticle {
     constructor() {
         this.createParticleSystem();
-        this.initTeslaEffects();
         this.bindEvents();
     }
 
