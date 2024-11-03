@@ -35,13 +35,3 @@ class TeslaNavigation {
         setTimeout(() => bolt.remove(), 500);
     }
 }
-
-// Добавяме анимацията за светкавицата
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes boltFlash {
-        0% { transform: scaleX(0); opacity: 1; }
-        100% { transform: scaleX(1); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
