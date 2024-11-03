@@ -1,7 +1,6 @@
 class QuantumParticle {
     constructor() {
         this.createParticleSystem();
-        this.bindEvents();
     }
 
     createParticleSystem() {
@@ -61,39 +60,5 @@ class QuantumParticle {
         });
 
         requestAnimationFrame(() => this.animateParticles());
-    }
-
-    // Форма за контакт
-    bindEvents() {
-        const form = document.querySelector('.astral-form');
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.teleportMessage();
-        });
-    }
-
-    teleportMessage() {
-        const button = document.querySelector('.quantum-button');
-        button.innerHTML = 'Телепортация...';
-        
-        // Симулираме квантова телепортация
-        setTimeout(() => {
-            button.innerHTML = 'Съобщението е телепортирано!';
-            this.createTeleportEffect();
-            
-            setTimeout(() => {
-                button.innerHTML = 'Телепортирай съобщението';
-            }, 2000);
-        }, 1000);
-    }
-
-    createTeleportEffect() {
-        const form = document.querySelector('.astral-form');
-        form.style.transform = 'scale(1.02)';
-        
-        setTimeout(() => {
-            form.style.transform = 'scale(1)';
-        }, 200);
     }
 }
