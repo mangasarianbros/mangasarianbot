@@ -9,7 +9,7 @@ class HologramEffect {
                 color: '#ffd700' // златисто
             },
             {
-                name: 'Кулю',
+                name: 'Кулюo',
                 quote: 'Във кубъ, брат, във кубъ',
                 image: 'assets/img/kulyu.jpg',
                 color: '#ff6ec7' // неоново розово
