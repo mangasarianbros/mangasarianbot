@@ -1,24 +1,28 @@
 class HologramEffect {
     constructor() {
-        this.initHolograms();
-    }
-
-    initHolograms() {
-        const hologramSection = document.createElement('section');
-        hologramSection.className = 'hologram-container';
-        
-        // Създаваме холограмите на братята
-        const brothers = [
-            { name: 'Зюмбюл', quote: 'Душата ми хиляда вата' },
-            { name: 'Кулю', quote: 'Във кубъ, брат, във кубъ' },
-            { name: 'Среброто', quote: 'CD-рома на компютъра му' }
+        // Конфигурация на братята
+        this.brothers = [
+            {
+                name: 'Зюмбюл',
+                quote: 'Душата ми хиляда вата',
+                image: 'assets/img/zyumbul.jpg',
+                color: '#ffd700' // златисто
+            },
+            {
+                name: 'Кулю',
+                quote: 'Във кубъ, брат, във кубъ',
+                image: 'assets/img/kulyu.jpg',
+                color: '#ff6ec7' // неоново розово
+            },
+            {
+                name: 'Среброто',
+                quote: 'CD-рома на компютъра му',
+                image: 'assets/img/srebroto.jpg',
+                color: '#00ffff' // циан
+            }
         ];
 
-        brothers.forEach(brother => {
-            this.createHologram(brother, hologramSection);
-        });
-
-        document.querySelector('.hero-parallax').appendChild(hologramSection);
+        this.initHolograms();
     }
 
     createHologram(brother, container) {
@@ -27,10 +31,13 @@ class HologramEffect {
         hologram.innerHTML = `
             <div class="hologram-frame">
                 <div class="hologram-glitch"></div>
-                <div class="hologram-image"></div>
+                <div class="hologram-image" 
+                     style="background-image: url('${brother.image}');
+                            border: 2px solid ${brother.color}">
+                </div>
                 <div class="hologram-scan"></div>
                 <div class="hologram-text">
-                    <h3>${brother.name}</h3>
+                    <h3 style="color: ${brother.color}">${brother.name}</h3>
                     <p>"${brother.quote}"</p>
                 </div>
             </div>
@@ -40,7 +47,7 @@ class HologramEffect {
         
         // Добавяме интерактивност
         hologram.addEventListener('mouseenter', () => {
-            this.activateHologram(hologram);
+            this.activateHologram(hologram, brother);
         });
     }
 
