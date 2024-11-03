@@ -1,0 +1,167 @@
+:root {
+    /* Цветови променливи */
+    --quantum-indigo: #1a1b3a;
+    --quantum-gold: #ffd700;
+    --neon-pink: #ff6ec7;
+    --astral-white: #ffffff;
+    
+    /* Градиенти */
+    --holographic-gradient: linear-gradient(
+        45deg,
+        var(--quantum-gold),
+        var(--neon-pink),
+        #00ffff
+    );
+}
+
+/* Ресет и основни стилове */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--quantum-indigo);
+    color: var(--astral-white);
+    font-family: 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Tesla навигация */
+.tesla-nav {
+    position: fixed;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(26, 27, 58, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.quantum-menu {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    list-style: none;
+}
+
+.quantum-menu a {
+    color: var(--astral-white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.quantum-menu a::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--holographic-gradient);
+    transition: width 0.3s ease;
+}
+
+.quantum-menu a:hover::before {
+    width: 100%;
+}
+
+/* Херо секция с паралакс */
+.hero-parallax {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.quantum-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.hero-title {
+    font-family: 'Futura', sans-serif;
+    font-size: 3.5rem;
+    text-align: center;
+    background: var(--holographic-gradient);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: titleFloat 4s ease-in-out infinite;
+}
+
+/* Контакт форма */
+.quantum-contact {
+    padding: 5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.astral-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    color: var(--astral-white);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    border-color: var(--quantum-gold);
+}
+
+.quantum-button {
+    padding: 1rem 2rem;
+    background: var(--holographic-gradient);
+    border: none;
+    border-radius: 8px;
+    color: var(--quantum-indigo);
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.quantum-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Анимации */
+@keyframes titleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Респонсив дизайн */
+@media (max-width: 768px) {
+    .quantum-menu {
+        gap: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        padding: 0 1rem;
+    }
+}
