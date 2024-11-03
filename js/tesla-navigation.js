@@ -1,5 +1,3 @@
-// tesla-navigation.js
-
 class TeslaNavigation {
     constructor() {
         this.initTeslaEffects();
