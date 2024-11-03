@@ -1,6 +1,7 @@
 class HologramEffect {
     constructor() {
         // Конфигурация на братята
+        this.defaultImage = 'assets/img/hologram-default.jpg';
         this.brothers = [
             {
                 name: 'Зюмбюл',
@@ -9,7 +10,7 @@ class HologramEffect {
                 color: '#ffd700' // златисто
             },
             {
-                name: 'Кулюo',
+                name: 'Кулю',
                 quote: 'Във кубъ, брат, във кубъ',
                 image: 'assets/img/kulyu.jpg',
                 color: '#ff6ec7' // неоново розово
@@ -25,14 +26,27 @@ class HologramEffect {
         this.initHolograms();
     }
 
+    initHolograms() {
+        const hologramSection = document.createElement('section');
+        hologramSection.className = 'hologram-container';
+        
+        // Създаваме холограмите на братята
+        this.brothers.forEach(brother => {
+            this.createHologram(brother, hologramSection);
+        });
+
+        document.querySelector('.hero-parallax').appendChild(hologramSection);
+    }
+
     createHologram(brother, container) {
+        const imageUrl = this.validateImage(brother.image);
         const hologram = document.createElement('div');
         hologram.className = 'hologram';
         hologram.innerHTML = `
             <div class="hologram-frame">
                 <div class="hologram-glitch"></div>
                 <div class="hologram-image" 
-                     style="background-image: url('${brother.image}');
+                     style="background-image: url('${imageUrl}');
                             border: 2px solid ${brother.color}">
                 </div>
                 <div class="hologram-scan"></div>
@@ -49,25 +63,49 @@ class HologramEffect {
         hologram.addEventListener('mouseenter', () => {
             this.activateHologram(hologram, brother);
         });
+
+        hologram.addEventListener('mouseleave', () => {
+            this.deactivateHologram(hologram);
+        });
+
+        // Добавяме взаимодействие между холограмите
+        hologram.addEventListener('click', () => {
+            this.triggerHologramInteraction(hologram, brother);
+        });
+    }
+
+    validateImage(url) {
+        const img = new Image();
+        img.src = url;
+        return img.complete ? url : this.defaultImage;
     }
 
     activateHologram(hologram, brother) {
         hologram.classList.add('active');
         this.createHolographicNoise(hologram);
+        this.createHologramFlares(hologram, brother.color);
         
-        // Симулираме холограмно трептене
-        setTimeout(() => {
-            hologram.classList.remove('active');
-        }, 3000);
+        // Добавяме звуков ефект
+        this.playHologramSound('activate');
+    }
+
+    deactivateHologram(hologram) {
+        hologram.classList.remove('active');
+        // Премахваме временните ефекти
+        hologram.querySelectorAll('.hologram-noise, .hologram-flare').forEach(el => el.remove());
     }
 
     createHolographicNoise(hologram) {
         const noise = document.createElement('canvas');
         noise.className = 'hologram-noise';
+        noise.width = 300;
+        noise.height = 400;
         const ctx = noise.getContext('2d');
         
         // Анимираме холограмния шум
         const animate = () => {
+            if (!hologram.classList.contains('active')) return;
+
             const imageData = ctx.createImageData(noise.width, noise.height);
             const data = imageData.data;
             
@@ -84,6 +122,117 @@ class HologramEffect {
         };
         
         animate();
-        hologram.appendChild(noise);
+        hologram.querySelector('.hologram-frame').appendChild(noise);
+    }
+
+    createHologramFlares(hologram, color) {
+        for (let i = 0; i < 3; i++) {
+            const flare = document.createElement('div');
+            flare.className = 'hologram-flare';
+            flare.style.cssText = `
+                position: absolute;
+                width: 100px;
+                height: 2px;
+                background: ${color};
+                filter: blur(3px);
+                opacity: 0.7;
+                transform: rotate(${Math.random() * 360}deg) translateX(${Math.random() * 100}px);
+                animation: flareFloat 3s infinite linear;
+            `;
+            hologram.querySelector('.hologram-frame').appendChild(flare);
+        }
+    }
+
+    triggerHologramInteraction(hologram, brother) {
+        // Създаваме квантова връзка между холограмите
+        const otherHolograms = document.querySelectorAll('.hologram');
+        otherHolograms.forEach(other => {
+            if (other !== hologram) {
+                this.createQuantumLink(hologram, other, brother.color);
+            }
+        });
+
+        // Добавяме специален ефект на активната холограма
+        this.createQuantumPulse(hologram, brother.color);
+    }
+
+    createQuantumLink(from, to, color) {
+        const link = document.createElement('div');
+        link.className = 'quantum-link';
+        
+        const fromRect = from.getBoundingClientRect();
+        const toRect = to.getBoundingClientRect();
+        
+        const distance = Math.hypot(
+            fromRect.left - toRect.left,
+            fromRect.top - toRect.top
+        );
+
+        link.style.cssText = `
+            position: absolute;
+            left: ${fromRect.left + fromRect.width / 2}px;
+            top: ${fromRect.top + fromRect.height / 2}px;
+            width: ${distance}px;
+            height: 2px;
+            background: ${color};
+            filter: blur(1px);
+            transform-origin: left;
+            transform: rotate(${Math.atan2(
+                toRect.top - fromRect.top,
+                toRect.left - fromRect.left
+            )}rad);
+            animation: quantumLinkFade 1s ease-out forwards;
+        `;
+
+        document.body.appendChild(link);
+        setTimeout(() => link.remove(), 1000);
+    }
+
+    createQuantumPulse(hologram, color) {
+        const pulse = document.createElement('div');
+        pulse.className = 'quantum-pulse';
+        pulse.style.cssText = `
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border: 2px solid ${color};
+            border-radius: 10px;
+            animation: quantumPulse 1s ease-out forwards;
+        `;
+
+        hologram.querySelector('.hologram-frame').appendChild(pulse);
+        setTimeout(() => pulse.remove(), 1000);
+    }
+
+    playHologramSound(type) {
+        // Здесь можно добавить звуковые эффекты
+        // const sound = new Audio(`assets/sounds/${type}.mp3`);
+        // sound.volume = 0.3;
+        // sound.play();
     }
 }
+
+// Добавяме необходимите анимации
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes quantumLinkFade {
+        0% { opacity: 0; transform: scale(0); }
+        50% { opacity: 0.5; }
+        100% { opacity: 0; transform: scale(1); }
+    }
+
+    @keyframes quantumPulse {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+    }
+
+    @keyframes flareFloat {
+        0% { transform: rotate(0deg) translateX(0); opacity: 0; }
+        50% { opacity: 0.7; }
+        100% { transform: rotate(360deg) translateX(100px); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
