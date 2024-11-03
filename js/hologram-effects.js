@@ -51,7 +51,7 @@ class HologramEffect {
         });
     }
 
-    activateHologram(hologram) {
+    activateHologram(hologram, brother) {
         hologram.classList.add('active');
         this.createHolographicNoise(hologram);
         
