@@ -144,6 +144,17 @@ body {
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
+/* допълнителен CSS за квантовите частици */
+.particle {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+.tesla-bolt {
+    pointer-events: none;
+    z-index: 1001;
+}
+
 /* Анимации */
 @keyframes titleFloat {
     0%, 100% {
