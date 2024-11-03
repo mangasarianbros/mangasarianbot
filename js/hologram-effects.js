@@ -1,5 +1,3 @@
-// hologram-effects.js
-
 class HologramEffect {
     constructor() {
         this.initHolograms();
