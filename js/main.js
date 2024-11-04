@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // Добавяме необходимите анимации
 const style = document.createElement('style');
 style.textContent = `
+    @keyframes boltFlash {
+        0% { transform: scaleX(0); opacity: 1; }
+        100% { transform: scaleX(1); opacity: 0; }
+    }
+    
     @keyframes quantumLinkFade {
         0% { opacity: 0; transform: scale(0); }
         50% { opacity: 0.5; }
