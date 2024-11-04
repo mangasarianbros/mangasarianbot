@@ -35,11 +35,11 @@ class TeslaNavigation {
 }
 
 // Добавяме и малко Tesla анимации
-const style = document.createElement('bolt');
-bolt.textContent = `
+const style = document.createElement('style');
+style.textContent = `
     @keyframes boltFlash {
         0% { transform: scaleX(0); opacity: 1; }
         100% { transform: scaleX(1); opacity: 0; }
     }
 `;
-document.head.appendChild(bolt);
+document.head.appendChild(style);
