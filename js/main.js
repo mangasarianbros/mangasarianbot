@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new QuantumParticle();
     new TeslaNavigation();
     new HologramEffect();
+    new FormTeleport();
     
     console.log('Квантовото просветление е заредено! 🌟');
 });
