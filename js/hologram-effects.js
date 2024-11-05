@@ -6,19 +6,19 @@ class HologramEffect {
             {
                 name: 'Зюмбюл',
                 quote: 'Душата ми хиляда вата',
-                image: 'assets/img/zyumbul.jpg',
+                image: 'assets/img/zyumbul.png',
                 color: '#ffd700' // златисто
             },
             {
                 name: 'Кулю',
                 quote: 'Във кубъ, брат, във кубъ',
-                image: 'assets/img/kulyu.jpg',
+                image: 'assets/img/kulyu.png',
                 color: '#ff6ec7' // неоново розово
             },
             {
                 name: 'Среброто',
                 quote: 'CD-рома на компютъра му',
-                image: 'assets/img/srebroto.jpg',
+                image: 'assets/img/srebroto.png',
                 color: '#00ffff' // циан
             }
         ];
