@@ -1,7 +1,7 @@
 class HologramEffect {
     constructor() {
         // Конфигурация на братята
-        this.defaultImage = 'assets/img/hologram-default.jpg';
+        this.defaultImage = 'assets/img/hologram-default.png';
         this.brothers = [
             {
                 name: 'Зюмбюл',
